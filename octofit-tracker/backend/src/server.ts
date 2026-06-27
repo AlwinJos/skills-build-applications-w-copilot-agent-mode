@@ -1,28 +1,17 @@
-import express from 'express';
-import mongoose from 'mongoose';
+import { createApp, connectToDatabase } from './app.js';
 
-const app = express();
 const PORT = process.env.PORT || 8000;
-const MONGO_URI = process.env.MONGO_URI || 'mongodb://127.0.0.1:27017/octofit_db';
 
-app.use(express.json());
+async function startServer(): Promise<void> {
+  const app = createApp();
+  await connectToDatabase();
 
-app.get('/api/health', (_req, res) => {
-  res.json({ status: 'ok' });
+  app.listen(PORT, () => {
+    console.log(`Backend listening on port ${PORT}`);
+  });
+}
+
+startServer().catch((error) => {
+  console.error('Failed to start server', error);
+  process.exit(1);
 });
-
-const startServer = async () => {
-  try {
-    await mongoose.connect(MONGO_URI);
-    console.log('Connected to MongoDB');
-
-    app.listen(PORT, () => {
-      console.log(`Backend listening on port ${PORT}`);
-    });
-  } catch (error) {
-    console.error('Failed to start server', error);
-    process.exit(1);
-  }
-};
-
-startServer();
