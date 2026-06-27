@@ -12,7 +12,7 @@ async function connectToDatabase() {
     if (mongoose_1.default.connection.readyState >= 1) {
         return;
     }
-    await mongoose_1.default.connect(exports.MONGO_URI);
+    await mongoose_1.default.connect(exports.MONGO_URI, { dbName: 'octofit_db' });
     console.log(`Connected to MongoDB at ${exports.MONGO_URI}`);
 }
 async function disconnectFromDatabase() {

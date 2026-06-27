@@ -7,7 +7,7 @@ export async function connectToDatabase(): Promise<void> {
     return;
   }
 
-  await mongoose.connect(MONGO_URI);
+  await mongoose.connect(MONGO_URI, { dbName: 'octofit_db' });
   console.log(`Connected to MongoDB at ${MONGO_URI}`);
 }
 
