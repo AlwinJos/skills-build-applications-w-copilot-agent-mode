@@ -1,6 +1,9 @@
 import { useEffect, useState } from 'react';
 import { getApiBaseUrl, normalizeCollection } from '../api.js';
 
+// API endpoint: https://{codespace}-8000.app.github.dev/api/leaderboard
+const ENDPOINT = 'leaderboard';
+
 function Leaderboard() {
   const [entries, setEntries] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -11,7 +14,7 @@ function Leaderboard() {
 
     async function loadLeaderboard() {
       try {
-        const response = await fetch(getApiBaseUrl('leaderboard'));
+        const response = await fetch(getApiBaseUrl(ENDPOINT));
         if (!response.ok) {
           throw new Error(`Request failed with ${response.status}`);
         }

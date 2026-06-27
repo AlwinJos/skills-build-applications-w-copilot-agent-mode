@@ -1,6 +1,9 @@
 import { useEffect, useState } from 'react';
 import { getApiBaseUrl, normalizeCollection } from '../api.js';
 
+// API endpoint: https://{codespace}-8000.app.github.dev/api/activities
+const ENDPOINT = 'activities';
+
 function Activities() {
   const [activities, setActivities] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -11,7 +14,7 @@ function Activities() {
 
     async function loadActivities() {
       try {
-        const response = await fetch(getApiBaseUrl('activities'));
+        const response = await fetch(getApiBaseUrl(ENDPOINT));
         if (!response.ok) {
           throw new Error(`Request failed with ${response.status}`);
         }

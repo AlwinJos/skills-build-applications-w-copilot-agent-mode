@@ -1,6 +1,9 @@
 import { useEffect, useState } from 'react';
 import { getApiBaseUrl, normalizeCollection } from '../api.js';
 
+// API endpoint: https://{codespace}-8000.app.github.dev/api/users
+const ENDPOINT = 'users';
+
 function Users() {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -11,7 +14,7 @@ function Users() {
 
     async function loadUsers() {
       try {
-        const response = await fetch(getApiBaseUrl('users'));
+        const response = await fetch(getApiBaseUrl(ENDPOINT));
         if (!response.ok) {
           throw new Error(`Request failed with ${response.status}`);
         }
