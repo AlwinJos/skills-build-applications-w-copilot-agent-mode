@@ -3,9 +3,9 @@ import { Activity, LeaderboardEntry, Team, User, Workout } from './models.js';
 import { connectToDatabase } from './config/database.js';
 
 export function createApiBaseUrl(req?: Request): string {
-  const codespaceName = process.env.CODESPACE_NAME;
-  if (codespaceName) {
-    return `https://${codespaceName}-8000.app.github.dev`;
+  const codespaceName = process.env.CODESPACE_NAME || process.env.GITHUB_CODESPACE_NAME;
+  if (codespaceName?.trim()) {
+    return `https://${codespaceName.trim()}-8000.app.github.dev`;
   }
 
   return req?.protocol && req.get('host')

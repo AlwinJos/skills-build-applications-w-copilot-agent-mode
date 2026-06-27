@@ -10,9 +10,9 @@ const express_1 = __importDefault(require("express"));
 const models_js_1 = require("./models.js");
 const database_js_1 = require("./config/database.js");
 function createApiBaseUrl(req) {
-    const codespaceName = process.env.CODESPACE_NAME;
-    if (codespaceName) {
-        return `https://${codespaceName}-8000.app.github.dev`;
+    const codespaceName = process.env.CODESPACE_NAME || process.env.GITHUB_CODESPACE_NAME;
+    if (codespaceName?.trim()) {
+        return `https://${codespaceName.trim()}-8000.app.github.dev`;
     }
     return req?.protocol && req.get('host')
         ? `${req.protocol}://${req.get('host')}`
