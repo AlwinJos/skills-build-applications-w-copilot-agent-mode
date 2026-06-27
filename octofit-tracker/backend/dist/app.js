@@ -8,7 +8,7 @@ exports.createApp = createApp;
 exports.connectToDatabaseWithFallback = connectToDatabaseWithFallback;
 const express_1 = __importDefault(require("express"));
 const models_js_1 = require("./models.js");
-const database_js_1 = require("./database.js");
+const database_js_1 = require("./config/database.js");
 function createApiBaseUrl(req) {
     const codespaceName = process.env.CODESPACE_NAME;
     if (codespaceName) {

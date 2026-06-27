@@ -1,6 +1,6 @@
 import express, { type Express, type Request, type Response } from 'express';
 import { Activity, LeaderboardEntry, Team, User, Workout } from './models.js';
-import { connectToDatabase } from './database.js';
+import { connectToDatabase } from './config/database.js';
 
 export function createApiBaseUrl(req?: Request): string {
   const codespaceName = process.env.CODESPACE_NAME;

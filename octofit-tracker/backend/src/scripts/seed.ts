@@ -1,5 +1,5 @@
 import { Activity, LeaderboardEntry, Team, User, Workout } from '../models.js';
-import { connectToDatabase, disconnectFromDatabase, MONGO_URI } from '../database.js';
+import { connectToDatabase, disconnectFromDatabase } from '../config/database.js';
 
 async function seedDatabase(): Promise<void> {
   console.log('Seed the octofit_db database with test data');

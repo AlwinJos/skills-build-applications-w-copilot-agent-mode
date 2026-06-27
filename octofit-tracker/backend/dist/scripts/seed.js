@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const models_js_1 = require("../models.js");
-const database_js_1 = require("../database.js");
+const database_js_1 = require("../config/database.js");
 async function seedDatabase() {
     console.log('Seed the octofit_db database with test data');
     await (0, database_js_1.connectToDatabase)();
