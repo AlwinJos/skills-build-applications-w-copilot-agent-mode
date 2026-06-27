@@ -1,8 +1,6 @@
 import express, { type Express, type Request, type Response } from 'express';
-import mongoose from 'mongoose';
 import { Activity, LeaderboardEntry, Team, User, Workout } from './models.js';
-
-const MONGO_URI = process.env.MONGO_URI || 'mongodb://127.0.0.1:27017/octofit_db';
+import { connectToDatabase } from './database.js';
 
 export function createApiBaseUrl(req?: Request): string {
   const codespaceName = process.env.CODESPACE_NAME;
@@ -73,10 +71,9 @@ export function createApp(): Express {
   return app;
 }
 
-export async function connectToDatabase(): Promise<boolean> {
+export async function connectToDatabaseWithFallback(): Promise<boolean> {
   try {
-    await mongoose.connect(MONGO_URI);
-    console.log('Connected to MongoDB');
+    await connectToDatabase();
     return true;
   } catch (error) {
     console.warn('MongoDB connection skipped:', error);

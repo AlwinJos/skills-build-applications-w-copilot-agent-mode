@@ -5,11 +5,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.createApiBaseUrl = createApiBaseUrl;
 exports.createApp = createApp;
-exports.connectToDatabase = connectToDatabase;
+exports.connectToDatabaseWithFallback = connectToDatabaseWithFallback;
 const express_1 = __importDefault(require("express"));
-const mongoose_1 = __importDefault(require("mongoose"));
 const models_js_1 = require("./models.js");
-const MONGO_URI = process.env.MONGO_URI || 'mongodb://127.0.0.1:27017/octofit_db';
+const database_js_1 = require("./database.js");
 function createApiBaseUrl(req) {
     const codespaceName = process.env.CODESPACE_NAME;
     if (codespaceName) {
@@ -65,10 +64,9 @@ function createApp() {
     registerRoutes(app);
     return app;
 }
-async function connectToDatabase() {
+async function connectToDatabaseWithFallback() {
     try {
-        await mongoose_1.default.connect(MONGO_URI);
-        console.log('Connected to MongoDB');
+        await (0, database_js_1.connectToDatabase)();
         return true;
     }
     catch (error) {

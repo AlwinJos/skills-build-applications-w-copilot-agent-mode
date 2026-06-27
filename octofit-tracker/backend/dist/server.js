@@ -4,7 +4,7 @@ const app_js_1 = require("./app.js");
 const PORT = process.env.PORT || 8000;
 async function startServer() {
     const app = (0, app_js_1.createApp)();
-    await (0, app_js_1.connectToDatabase)();
+    await (0, app_js_1.connectToDatabaseWithFallback)();
     app.listen(PORT, () => {
         console.log(`Backend listening on port ${PORT}`);
     });

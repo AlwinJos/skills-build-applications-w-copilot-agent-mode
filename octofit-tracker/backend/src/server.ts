@@ -1,10 +1,10 @@
-import { createApp, connectToDatabase } from './app.js';
+import { createApp, connectToDatabaseWithFallback } from './app.js';
 
 const PORT = process.env.PORT || 8000;
 
 async function startServer(): Promise<void> {
   const app = createApp();
-  await connectToDatabase();
+  await connectToDatabaseWithFallback();
 
   app.listen(PORT, () => {
     console.log(`Backend listening on port ${PORT}`);
